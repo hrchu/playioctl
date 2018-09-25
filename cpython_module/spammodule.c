@@ -8,7 +8,11 @@
 static PyObject *
 spam_system(PyObject *self, PyObject *args)
 {
-    int fd = open("/dev/nst1", O_RDONLY);
+    const char *command;
+    if (!PyArg_ParseTuple(args, "s", &command))
+        return NULL;
+
+    int fd = open(command, O_RDONLY);
 
     struct mtop mt_com;
 

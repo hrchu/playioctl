@@ -9,7 +9,8 @@ The code is intended to show how to do hardware control from Python and is prese
 ## Prerequisites
 
 1. Python 3 / Linux
-1. root privilege is necessary to operations of magnetic tape drive
+2. You will need either a real tape drive or use **mhvtl** as a simulate tape drive.
+3. root privilege is necessary to operations of magnetic tape drive
 
 ## How to run
 

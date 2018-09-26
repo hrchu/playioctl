@@ -15,7 +15,8 @@ The code is intended to show how to control hardware by Python and is presented 
 
 ## How to run
 
-1. ``$ cd [project_home]/by_cpython_extension/pymt``
-2. ``$ pip install .``
-3. ``$ python demo.py``
+1. install the cpython extension
+ - ``$ cd [project_home]/by_cpython_extension/pymt``
+ - ``$ pip install .``
+2. Run the demo code ``$ python demo.py``
 

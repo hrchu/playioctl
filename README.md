@@ -18,5 +18,5 @@ The code is intended to show how to control hardware by Python and is presented 
 
 1. ``$ cd [project_home]/by_cpython_extension/pymt``
 2. ``$ pip install .``
-3. python demo.py
+3. ``$ python demo.py``
 

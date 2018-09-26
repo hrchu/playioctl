@@ -10,9 +10,8 @@ The code is intended to show how to control hardware by Python and is presented 
 
 ## Prerequisites
 
-1. root privilege needed by magnetic tape drive operations
-2. Python 3
-
+1. Python 3 / Linux
+1. root privilege is necessary to operations of magnetic tape drive
 
 ## How to run
 

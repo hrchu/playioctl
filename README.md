@@ -1,5 +1,5 @@
-Demonstrate how to control hardware via ioctl from Python by showing the magnetic tape drive example  ✨🍰✨
-============================================================
+How to do hardware control via ioctl from Python feat. magnetic tape drive
+===============================================================================
 
 ![Screenshot](https://user-images.githubusercontent.com/3183314/46056862-583cf080-c185-11e8-9b98-4d0a7853787d.png)
 

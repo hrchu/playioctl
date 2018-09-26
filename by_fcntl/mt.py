@@ -1,4 +1,7 @@
-import struct, fcntl
+import fcntl
+import struct
+
+# https://github.com/vpelletier/python-ioctl-opt
 
 _IOC_NRBITS = 8
 _IOC_TYPEBITS = 8
@@ -19,6 +22,7 @@ IOC_NONE = 0
 IOC_WRITE = 1
 IOC_READ = 2
 
+
 def IOC(dir, type, nr, size):
     """
     dir
@@ -33,6 +37,7 @@ def IOC(dir, type, nr, size):
     assert size <= _IOC_SIZEMASK, size
     return (dir << _IOC_DIRSHIFT) | (type << _IOC_TYPESHIFT) | (nr << _IOC_NRSHIFT) | (size << _IOC_SIZESHIFT)
 
+
 def IOC_SIZECHECK(t):
     """
     Returns the size of given type, and check its suitability for use in an
@@ -42,6 +47,7 @@ def IOC_SIZECHECK(t):
     assert result <= _IOC_SIZEMASK, result
     return result
 
+
 def IOW(type, nr, size):
     """
     An ioctl with write parameters.
@@ -49,7 +55,36 @@ def IOW(type, nr, size):
     """
     return IOC(IOC_WRITE, type, nr, IOC_SIZECHECK(size))
 
-fd = open('/dev/nst1', 'r')
-arg = struct.pack('hi', 6, 1)
-fcntl.ioctl(fd, IOW(ord('m'), 1, len(arg)), arg)
-fd.close()
+
+def IOR(type, nr, size):
+    """
+    An ioctl with read parameters.
+    size (ctype type or instance)
+        Type/structure of the argument passed to ioctl's "arg" argument.
+    """
+    return IOC(IOC_READ, type, nr, IOC_SIZECHECK(size))
+
+
+def rewind(device):
+    MTREW = 6
+    mt_com = struct.pack('hi', MTREW, 1)
+    MTIOCTOP = IOW(ord('m'), 1, len(mt_com))
+
+    with open(device, 'r') as fd:
+        fcntl.ioctl(fd, MTIOCTOP, mt_com)
+
+
+def status(device):
+    long_size = 8
+    int_size = 4
+    status = bytearray(long_size * 5 + int_size * 2)
+    MTIOCGET = IOR(ord('m'), 2, len(status))
+
+    with open(device, 'r') as fd:
+        fcntl.ioctl(fd, MTIOCGET, status)
+        status = struct.unpack('lllllii', status)
+        return {
+            "file number": status[-2],
+            "block number": status[-1],
+            "partition": status[1] & 0xff
+        }

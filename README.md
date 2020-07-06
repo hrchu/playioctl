@@ -19,3 +19,6 @@ The code is intended to show how to do hardware control from Python and is prese
  - ``$ pip install .``
 2. Run the demo code ``$ python demo.py``
 
+## Courtesy
+* [olavmrk/python-ioctl](https://github.com/olavmrk/python-ioctl)
+* [vpelletier/python-ioctl-opt](https://github.com/vpelletier/python-ioctl-opt)
